@@ -1,0 +1,40 @@
+# Configuration for TSP environment
+env:
+  name: "tsp"
+  tsp:
+    num_cities: 10
+    city_range: [0, 100]
+
+training:
+  algorithm: "ppo"
+  num_episodes: 5000
+  max_steps_per_episode: 100
+  learning_rate: 0.001
+  gamma: 0.99
+  
+  ppo:
+    clip_ratio: 0.2
+    value_loss_coef: 0.5
+    entropy_coef: 0.01
+    max_grad_norm: 0.5
+    ppo_epochs: 4
+
+model:
+  hidden_sizes: [128, 128]
+  activation: "relu"
+  dropout: 0.0
+
+evaluation:
+  num_eval_episodes: 100
+  eval_frequency: 500
+  save_frequency: 1000
+  log_frequency: 100
+
+logging:
+  log_dir: "logs_tsp"
+  use_tensorboard: true
+  use_wandb: false
+
+device: "auto"
+seed: 42
+deterministic: true

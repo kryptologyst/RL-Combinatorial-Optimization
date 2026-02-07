@@ -1,0 +1,67 @@
+# Configuration for RL Combinatorial Optimization Project
+
+# Environment settings
+env:
+  name: "knapsack"  # Options: knapsack, tsp, graph_coloring
+  knapsack:
+    num_items: 10
+    capacity: 50
+    value_range: [1, 100]
+    weight_range: [1, 20]
+  tsp:
+    num_cities: 10
+    city_range: [0, 100]
+  graph_coloring:
+    num_nodes: 10
+    num_colors: 3
+    edge_probability: 0.3
+
+# Training settings
+training:
+  algorithm: "reinforce"  # Options: reinforce, ppo, a2c
+  num_episodes: 10000
+  max_steps_per_episode: 100
+  learning_rate: 0.001
+  gamma: 0.99
+  batch_size: 32
+  
+  # PPO specific
+  ppo:
+    clip_ratio: 0.2
+    value_loss_coef: 0.5
+    entropy_coef: 0.01
+    max_grad_norm: 0.5
+    ppo_epochs: 4
+    
+  # REINFORCE specific
+  reinforce:
+    baseline_type: "moving_average"  # Options: none, moving_average, neural_network
+    baseline_decay: 0.99
+
+# Model settings
+model:
+  hidden_sizes: [128, 128]
+  activation: "relu"
+  dropout: 0.0
+  use_batch_norm: false
+
+# Evaluation settings
+evaluation:
+  num_eval_episodes: 100
+  eval_frequency: 1000
+  save_frequency: 5000
+  log_frequency: 100
+
+# Logging settings
+logging:
+  log_dir: "logs"
+  use_tensorboard: true
+  use_wandb: false
+  wandb_project: "rl-combinatorial-optimization"
+  
+# Device settings
+device: "auto"  # Options: auto, cpu, cuda, mps
+
+# Reproducibility
+seed: 42
+deterministic: true
